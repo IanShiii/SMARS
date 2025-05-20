@@ -45,8 +45,8 @@ void drive(double linearSpeed, double angularSpeed) {
   int rightSpeed = (int)(255 * linearSpeed + 255 * angularSpeed);
   rightSpeed = clamp(rightSpeed, -255, 255);
 
-  setSpeed(leftMotor, leftSpeed, true);
-  setSpeed(rightMotor, rightSpeed, false);
+  setSpeed(leftMotor, leftSpeed, false);
+  setSpeed(rightMotor, rightSpeed, true);
 }
 
 void setSpeed(AF_DCMotor motor, int speed, bool isReversed) {
