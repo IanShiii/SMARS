@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <AFMotor.h>
+#include <HCSR04.h>
 
 void setSpeed(AF_DCMotor, int, bool);
 void drive(double, double);
@@ -8,6 +9,10 @@ int clamp(int, int, int);
 
 AF_DCMotor leftMotor = AF_DCMotor(1);
 AF_DCMotor rightMotor = AF_DCMotor(2);
+
+uint8_t TRIG_PIN = A4;
+uint8_t ECHO_PIN = A5; 
+UltraSonicDistanceSensor distanceSensor = UltraSonicDistanceSensor(TRIG_PIN, ECHO_PIN);
 
 void setup() {
   Serial.begin(9600);
@@ -35,6 +40,10 @@ void loop() {
       break;
     }
   }
+
+  Serial.println(distanceSensor.measureDistanceCm(20));
+
+  delayMicroseconds(4);
 }
 
 // positive linearSpeed [-1, 1] means forward
